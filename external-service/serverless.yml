@@ -1,0 +1,73 @@
+service: location-service-external
+
+custom:
+  tableName: 'locations-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
+      port: 8000
+      inMemory: true
+    stages:
+      - test
+      - dev
+  serverless-mocha-plugin:
+    preTestCommands:
+      - bash startOfflineTest.sh
+    postTestCommands:
+      - bash stopOfflineTest.sh
+  test:
+    deletion_policy: Delete
+    update_replace_policy: Delete
+  local-dev:
+    deletion_policy: Delete
+    update_replace_policy: Delete
+  prod:
+    deletion_policy: Retain
+    update_replace_policy: Retain
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage}
+  region: us-east-1
+  role: arn:aws:iam::157199415358:role/LambdaExecutionRole
+  environment:
+    LOCATION_TABLE: ${self:custom.tableName}
+    STAGE: ${self:provider.stage}
+    OFFICE_LATITUDE: 52.502931
+    OFFICE_LONGITUDE: 13.408249
+
+functions:
+  locationCreate:
+    handler: src/API/endpoints/create.submit
+    memorySize: 128
+    description: Submit location information
+    events:
+      - http:
+          path: location
+          method: post
+
+resources:
+  Resources:
+    LocationsDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: ${self:custom.${self:provider.stage}.deletion_policy}
+      UpdateReplacePolicy: ${self:custom.${self:provider.stage}.update_replace_policy}
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-mocha-plugin
