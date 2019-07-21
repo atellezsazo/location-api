@@ -1,0 +1,59 @@
+service: location-service-internal
+
+custom:
+  tableName: 'locations-${self:provider.stage}'
+  dynamodb:
+    start:
+      migrate: true
+      port: 8000
+      inMemory: true
+    stages:
+      - test
+      - dev
+  serverless-mocha-plugin:
+    preTestCommands:
+      - bash ./../startOfflineTest.sh
+    postTestCommands:
+      - bash ./../stopOfflineTest.sh
+  test:
+    deletion_policy: Delete
+    update_replace_policy: Delete
+  dev:
+    deletion_policy: Retain
+    update_replace_policy: Retain
+  prod:
+    deletion_policy: Retain
+    update_replace_policy: Retain
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage}
+  region: us-east-1
+  role: arn:aws:iam::157199415358:role/LambdaExecutionRole
+  environment:
+    LOCATION_TABLE: ${self:custom.tableName}
+    STAGE: ${self:provider.stage}
+
+functions:
+  listLocations:
+    handler: src/API/endpoints/locations.list
+    memorySize: 128
+    description: locations information
+    events:
+      - http:
+          path: locations
+          method: get
+  locationDetail:
+    handler: src/API/endpoints/location.detail
+    memorySize: 128
+    description: locations information
+    events:
+      - http:
+          path: locations/{id}
+          method: get
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-mocha-plugin
