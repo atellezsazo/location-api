@@ -27,7 +27,7 @@ const getById = async (id) => {
     };
 
     const location = await db.get(data).promise();
-    if (location) {
+    if (location.Item) {
       return location.Item;
     }
     return false;

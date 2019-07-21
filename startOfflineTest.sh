@@ -11,9 +11,6 @@ sls dynamodb start -s test --migrate &> $TMPDynamoFILE &
 while ! grep "Dynamodb Local Started" $TMPDynamoFILE
 do sleep 1; done
 
-while ! grep "Serverless: DynamoDB - created table" $TMPDynamoFILE
-do sleep 1; done
-
 serverless offline -s test &> $TMPFILE &
 PID=$!
 echo $PID > .offline.pid
