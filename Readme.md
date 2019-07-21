@@ -18,7 +18,10 @@ A second API for internal use. The user should be able to consume the data data 
 
 ## API Documentation and Live Demo
 
-[Live DEMO]()
+Demo and Documentation
+
+- [External service](https://apilocation.docs.apiary.io/)
+- [Internal service](https://internalapilocation.docs.apiary.io/)
 
 ---
 
