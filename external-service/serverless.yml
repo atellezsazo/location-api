@@ -12,13 +12,13 @@ custom:
       - dev
   serverless-mocha-plugin:
     preTestCommands:
-      - bash startOfflineTest.sh
+      - bash ./../startOfflineTest.sh
     postTestCommands:
-      - bash stopOfflineTest.sh
+      - bash ./../stopOfflineTest.sh
   test:
     deletion_policy: Delete
     update_replace_policy: Delete
-  local-dev:
+  dev:
     deletion_policy: Delete
     update_replace_policy: Delete
   prod:

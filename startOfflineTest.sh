@@ -6,7 +6,7 @@ if [ -f .offline.pid ]; then
     exit 1
 fi
 
-sls dynamodb start -s test --migate &> $TMPDynamoFILE &
+sls dynamodb start -s test --migrate &> $TMPDynamoFILE &
 
 while ! grep "Dynamodb Local Started" $TMPDynamoFILE
 do sleep 1; done
