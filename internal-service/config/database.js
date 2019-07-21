@@ -2,14 +2,18 @@ const AWS = require('aws-sdk');
 
 const { IS_OFFLINE, LOCATION_TABLE, STAGE } = process.env;
 
-const dynamoDb = IS_OFFLINE === 'true' || STAGE === 'test'
-  ? new AWS.DynamoDB.DocumentClient({
+if (IS_OFFLINE === 'true' || STAGE === 'test') {
+  AWS.config.update({
     region: 'localhost',
     endpoint: 'http://localhost:8000',
-  })
-  : new AWS.DynamoDB.DocumentClient();
+  });
+}
+
+const client = new AWS.DynamoDB();
+const db = new AWS.DynamoDB.DocumentClient();
 
 module.exports = {
-  db: dynamoDb,
+  db,
+  client,
   tableName: LOCATION_TABLE,
 };
