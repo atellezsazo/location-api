@@ -1,6 +1,6 @@
 const officeLocation = {
-  longitude: process.env.OFFICE_LONGITUDE,
-  latitude: process.env.OFFICE_LATITUDE,
+  latitude: parseFloat(process.env.OFFICE_LATITUDE),
+  longitude: parseFloat(process.env.OFFICE_LONGITUDE),
 };
 
 module.exports = {

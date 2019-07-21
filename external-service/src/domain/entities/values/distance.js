@@ -1,19 +1,30 @@
 const isValidCoordinates = require('is-valid-coordinates');
 const geolib = require('geolib');
 
-const calcDistance = (coordinatesFrom, coordinatesTo) => {
-  if ((coordinatesFrom.latitude === coordinatesTo.latitude
-    && coordinatesFrom.longitude === coordinatesTo.longitude)
-    || (!isValidCoordinates(coordinatesFrom.longitude, coordinatesFrom.latitude)
-      || !isValidCoordinates(coordinatesTo.longitude, coordinatesTo.latitude))) {
+const equalDistance = (coordinatesStart, coordinatesEnd) => {
+  if (coordinatesStart.latitude === coordinatesEnd.latitude
+    && coordinatesStart.longitude === coordinatesEnd.longitude) {
+    return true;
+  }
+  return false;
+};
+
+const validCoordinates = coordinate => isValidCoordinates(
+  coordinate.longitude,
+  coordinate.latitude,
+);
+
+const calcDistance = (coordinatesStart, coordinatesEnd) => {
+  if (equalDistance(coordinatesStart, coordinatesEnd)
+    || !validCoordinates(coordinatesStart)
+    || !validCoordinates(coordinatesEnd)) {
     return 0;
   }
 
   const distance = geolib.getDistance(
-    coordinatesFrom,
-    coordinatesTo,
+    coordinatesStart,
+    coordinatesEnd,
   );
-
   return distance / 1000;
 };
 

@@ -19,21 +19,21 @@ class Location {
     this.longitude = parseFloat(longitude);
 
     if (this.validCoordinates()) {
-      this.officeDistance = calcDistance(
-        officeLocation,
-        this.coordinates(),
-      );
+      this.setOfficeDistance();
     } else {
       throw new Error('Invalid coordinates');
     }
   }
 
-  validCoordinates() {
-    return isValidCoordinates(this.longitude, this.latitude);
-  }
-
   setId(id) {
     this.id = id;
+  }
+
+  setOfficeDistance() {
+    this.officeDistance = calcDistance(
+      officeLocation,
+      this.coordinates(),
+    );
   }
 
   coordinates() {
@@ -41,6 +41,10 @@ class Location {
       latitude: this.latitude,
       longitude: this.longitude,
     };
+  }
+
+  validCoordinates() {
+    return isValidCoordinates(this.longitude, this.latitude);
   }
 }
 

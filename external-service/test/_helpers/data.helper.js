@@ -1,7 +1,9 @@
+const { officeLocation } = require('./../../config/constants');
+
 const coordinates = {
   office: {
-    latitude: 52.502931,
-    longitude: 13.408249,
+    latitude: officeLocation.latitude,
+    longitude: officeLocation.longitude,
   },
   correct: {
     latitude: 17.2239583,

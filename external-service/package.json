@@ -24,7 +24,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "lint": "eslint -c .eslintrc.js \"**/*.js\"",
+    "lint": "eslint -c ./../.eslintrc.js \"**/*.js\"",
     "test": "sls invoke test --stage test -p test/",
     "test-cov": "nyc sls invoke test --stage test -p test/"
   },
