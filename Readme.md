@@ -39,7 +39,7 @@ $ npm install serverless -g
 
 ## Dev Environment 
 
-Install Node JS Application (For Dev Environment)
+Installation
 
 ```
 # Step 1. Choose API
@@ -67,7 +67,7 @@ Explanation to how to prepare the environment for automated tests for this APIs.
 # Step 1. Choose API
 $ cd [external-service | internal-service]
 
-# Step 3. Install Node JS dependencies
+# Step 2. Install Node JS dependencies
 $ npm install
 
 # Step 3. Install DyanamoDB Local (If it hasn't done yet)
@@ -97,7 +97,7 @@ npm run lint
 Deploy to cloud provider (AWS Lambda) 
 
 ```
-# Step 2. Deploy
+# Step 1. Deploy
 $ serverless deploy --stage [dev|prod|test]
 ```
 ---

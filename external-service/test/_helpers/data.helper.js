@@ -17,11 +17,16 @@ const coordinates = {
 
 exports.requestData = {
   valid: {
+    name: 'Testing name',
     ...coordinates.correct,
   },
   invalid: {
     ...coordinates.incorrect,
     name: 'No in earth',
+  },
+  invalid_no_required: {
+    description: 'Lorem ipsum....',
+    category: 'Tourist place',
   },
   fullData: {
     ...coordinates.correct,

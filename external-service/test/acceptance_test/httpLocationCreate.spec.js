@@ -17,7 +17,13 @@ describe('API Acceptance Test:', () => {
       .end((error, response) => {
         if (error) return done(error);
         expect(response.body).to.not.be.empty;
-        expect(response.body).to.have.all.keys('id', 'longitude', 'latitude', 'officeDistance');
+        expect(response.body).to.have.all.keys(
+          'id',
+          'name',
+          'longitude',
+          'latitude',
+          'officeDistance',
+        );
         return done();
       });
   });

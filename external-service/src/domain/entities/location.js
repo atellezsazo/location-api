@@ -7,10 +7,14 @@ class Location {
   constructor({
     longitude,
     latitude,
-    name = '',
+    name,
     category = '',
     description = '',
   }) {
+    if (!name) {
+      throw new Error('Invalid name');
+    }
+
     this.id = null;
     this.name = name;
     this.category = category;

@@ -45,6 +45,7 @@ describe('API Acceptance Test: locationDetail', () => {
         expect(response.body).to.not.be.empty;
         expect(response.body).to.have.all.keys(
           'id',
+          'name',
           'longitude',
           'latitude',
         );
