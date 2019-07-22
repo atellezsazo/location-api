@@ -12,6 +12,7 @@ describe('Unit Test: Create Location entity', () => {
     const location = new Location(requestData.valid);
     assert.equal(location.latitude, requestData.valid.latitude);
     assert.equal(location.longitude, requestData.valid.longitude);
+    assert.equal(location.name, requestData.valid.name);
     assert.equal(location.id, null);
     assert.isNotNull(location.officeDistance);
   });
@@ -42,7 +43,11 @@ describe('Unit Test: Create Location entity', () => {
     assert.isNotNull(location.officeDistance);
   });
 
-  it('BAD: should return location entity with all values', () => {
+  it('BAD: Should throw error, invalid location coordinates', () => {
     expect(() => new Location(requestData.invalid)).to.throw();
+  });
+
+  it('BAD:Should throw error, invalid required fields ', () => {
+    expect(() => new Location(requestData.invalid_no_required)).to.throw();
   });
 });

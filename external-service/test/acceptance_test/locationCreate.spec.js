@@ -26,7 +26,13 @@ describe('Acceptance Test: createLocation not empty response', () => {
     body: requestData.valid,
   }).then((response) => {
     const body = JSON.parse(response.body);
-    expect(body).to.have.all.keys('id', 'longitude', 'latitude', 'officeDistance');
+    expect(body).to.have.all.keys(
+      'id',
+      'name',
+      'longitude',
+      'latitude',
+      'officeDistance',
+    );
   }));
 
   it('HAPPY: Valid request, extra optional data', () => wrapped.run({

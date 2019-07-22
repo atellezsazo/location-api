@@ -60,6 +60,7 @@ describe('Unit Test:  Repository with sample data', () => {
       .getById(allSampleData.locations[1].id);
     expect(location).to.have.all.keys(
       'id',
+      'name',
       'longitude',
       'latitude',
     );

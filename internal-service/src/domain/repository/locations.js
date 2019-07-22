@@ -4,7 +4,8 @@ const all = async () => {
   try {
     const data = {
       TableName: tableName,
-      ProjectionExpression: 'id,latitude,longitude',
+      ProjectionExpression: 'id, #n ,latitude, longitude',
+      ExpressionAttributeNames: { '#n': 'name' },
     };
 
     const locations = await db.scan(data).promise();

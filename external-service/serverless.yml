@@ -19,8 +19,8 @@ custom:
     deletion_policy: Delete
     update_replace_policy: Delete
   dev:
-    deletion_policy: Delete
-    update_replace_policy: Delete
+    deletion_policy: Retain
+    update_replace_policy: Retain
   prod:
     deletion_policy: Retain
     update_replace_policy: Retain

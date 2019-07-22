@@ -41,6 +41,7 @@ describe('Acceptance Test: locationDetail', () => {
         'id',
         'longitude',
         'latitude',
+        'name',
       );
       expect(response).to.not.be.empty;
     }));
