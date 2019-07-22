@@ -31,6 +31,8 @@ provider:
   stage: ${opt:stage}
   region: us-east-1
   role: arn:aws:iam::157199415358:role/LambdaExecutionRole
+  apiKeys:
+    - internal-client
   environment:
     LOCATION_TABLE: ${self:custom.tableName}
     STAGE: ${self:provider.stage}
@@ -44,6 +46,7 @@ functions:
       - http:
           path: locations
           method: get
+          private: true
   locationDetail:
     handler: src/API/endpoints/location.detail
     memorySize: 128
@@ -52,6 +55,7 @@ functions:
       - http:
           path: locations/{id}
           method: get
+          private: true
 
 plugins:
   - serverless-dynamodb-local
