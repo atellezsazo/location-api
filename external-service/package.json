@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "aws-sdk": "^2.495.0",
+    "aws-sdk": "^2.814.0",
     "geolib": "^3.0.4",
     "http-status": "^1.3.2",
     "is-valid-coordinates": "^1.0.0",
