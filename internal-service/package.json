@@ -9,7 +9,7 @@
     "test-cov": "nyc sls invoke test --stage test -p test/"
   },
   "dependencies": {
-    "aws-sdk": "^2.495.0",
+    "aws-sdk": "^2.814.0",
     "http-status": "^1.3.2"
   },
   "devDependencies": {
